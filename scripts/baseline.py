@@ -1,10 +1,10 @@
 import os
-from GAN.CycleGAN import load_data, CycleGAN, check_directories
+from gans.CycleGAN import load_data, CycleGAN, check_directories
 import tensorflow as tf
 
 if __name__ == '__main__':
     #data_dir = '/content/summer2winter-yosemite'
-    data_dir = 'data/summer2winter_yosemite'
+    data_dir = '../data/summer2winter_yosemite'
 
     IMG_WIDTH = 256
     IMG_HEIGHT = 256
@@ -12,7 +12,7 @@ if __name__ == '__main__':
     RESTORE_TRAINING = False
 
     #PROJECT_ROOT_DIR = "/content/drive/MyDrive/CycleGAN/resnet/"
-    PROJECT_ROOT_DIR = "trainings/resnet/"
+    PROJECT_ROOT_DIR = "../trainings/resnet/"
 
     IMAGES_PATH = os.path.join(PROJECT_ROOT_DIR, "images")
     checkpoint_path = os.path.join(PROJECT_ROOT_DIR, "checkpoints")
