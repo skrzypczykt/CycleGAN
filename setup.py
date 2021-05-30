@@ -1,11 +1,12 @@
 from setuptools import setup
-from pip.req import parse_requirements
 
-# parse_requirements() returns generator of pip.req.InstallRequirement objects
-install_reqs = parse_requirements('requirements.txt')
 
-# reqs is a list of requirement
-reqs = [str(ir.req) for ir in install_reqs]
+
+
+
+with open('requirements.txt') as reqs_file:
+    reqs = reqs_file.read().splitlines()
+
 
 setup(
     # Needed to silence warnings (and to be a worthwhile package)
