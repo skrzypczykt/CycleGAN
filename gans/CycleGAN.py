@@ -93,7 +93,11 @@ def load_data(data_dir, IMG_WIDTH, IMG_HEIGHT):
     sample_A = next(iter(test_winter))
     sample_B = next(iter(test_summer))
 
-    return train_winter, test_winter, train_summer, test_summer, sample_A, sample_B
+    #data len
+    len_A = len(list(winter_train))
+    len_B = len(list(summer_train))
+
+    return train_winter, test_winter, train_summer, test_summer, sample_A, sample_B, min(len_A, len_B)
 
 
 # !mkdir
@@ -102,6 +106,34 @@ def load_data(data_dir, IMG_WIDTH, IMG_HEIGHT):
 # {IMAGES_PATH}
 # !mkdir
 # {checkpoint_path}
+
+def plot_gan_results(gan):
+
+  fig = plt.figure(figsize=(20, 10))
+
+  plt.plot([x[1] for x in gan.g_losses], color='green', linewidth=0.1)  # DISCRIM LOSS
+  # plt.plot([x[2] for x in gan.g_losses], color='orange', linewidth=0.1)
+  plt.plot([x[3] for x in gan.g_losses], color='blue', linewidth=0.1)  # CYCLE LOSS
+  # plt.plot([x[4] for x in gan.g_losses], color='orange', linewidth=0.25)
+  plt.plot([x[5] for x in gan.g_losses], color='red', linewidth=0.25)  # ID LOSS
+  # plt.plot([x[6] for x in gan.g_losses], color='orange', linewidth=0.25)
+
+  plt.plot([x[0] for x in gan.g_losses], color='black', linewidth=0.25)
+
+
+  plt.xlabel('batch', fontsize=18)
+  plt.ylabel('loss', fontsize=16)
+
+  plt.ylim(0, 5)
+
+  plt.show()
+
+
+def generate_test_results(gan, datasets, PROJECT_ROOT_DIR):
+  i = 0
+  for imgA, img_B in datasets:
+      gan.sample_images(imgA, img_B, i, os.path.join(PROJECT_ROOT_DIR, "test_results"), None, None, training=False)
+      i = i + 1
 
 
 def save_fig(fig_id, tight_layout=True, fig_extension="png", resolution=300):
@@ -566,6 +598,7 @@ def check_directories(PROJECT_ROOT_DIR):
     os.makedirs(os.path.join(PROJECT_ROOT_DIR, "checkpoints", "images"), exist_ok=True)
 
     os.makedirs(os.path.join(PROJECT_ROOT_DIR, "test_results"), exist_ok = True)
+    os.makedirs(os.path.join(PROJECT_ROOT_DIR, "test_results", "images"), exist_ok=True)
 
 
 

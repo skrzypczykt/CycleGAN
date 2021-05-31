@@ -20,7 +20,7 @@ if __name__ == '__main__':
     check_directories(PROJECT_ROOT_DIR)
 
     #load data
-    train_winter, test_winter, train_summer, test_summer, sample_A, sample_B = load_data(data_dir, IMG_WIDTH, IMG_HEIGHT)
+    train_winter, test_winter, train_summer, test_summer, sample_A, sample_B, length = load_data(data_dir, IMG_WIDTH, IMG_HEIGHT)
 
 
     gan = CycleGAN(
@@ -33,7 +33,7 @@ if __name__ == '__main__':
         , generator_type='resnet'
         , gen_n_filters=32
         , disc_n_filters=32
-        , n_batches=961
+        , n_batches=length
     )
 
     mode = 'build'
