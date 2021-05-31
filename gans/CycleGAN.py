@@ -473,7 +473,7 @@ class CycleGAN():
         valid = np.ones((batch_size,) + self.disc_patch)
         fake = np.zeros((batch_size,) + self.disc_patch)
 
-        for epoch in range(self.epoch, self.epoch + epochs):
+        for epoch in range(self.epoch + 1, self.epoch + epochs + 1 ):
             for batch_i, (imgs_A, imgs_B) in enumerate(data_loader):
 
                 d_loss = self.train_discriminators(imgs_A, imgs_B, valid, fake)
