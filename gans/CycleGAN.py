@@ -29,6 +29,7 @@ import pickle as pkl
 import random
 import time
 from collections import deque
+import re
 
 # %matplotlib inline
 import matplotlib.pyplot as plt
@@ -161,9 +162,14 @@ def preprocess_image_test(image, label):
     return image
 
 
+
+def get_last_epoch(checkpoint_path):
+    dir = os.path.join(checkpoint_path, 'weights')
+    #/weights-{max_epoch}.h5')
+    checkpoints = [re.search('(?<=weights-)\d+(?=.h5)',file_name).group(0) for file_name in os.listdir(dir) ]
+    return max(checkpoints)
+
 """#CycleGAN definition"""
-
-
 class ReflectionPadding2D(tf.keras.layers.Layer):
     def __init__(self, padding=(1, 1), **kwargs):
         self.padding = tuple(padding)
