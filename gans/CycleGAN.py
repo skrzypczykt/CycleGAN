@@ -484,7 +484,7 @@ class CycleGAN():
                 # Plot the progress
                 print(
                     "[Epoch {}/{}] [Batch {}/{}] [D loss: {}, acc: {}] [G loss: {}, adv: {}, recon:{}, id: ] time: {} ".format(
-                    epoch,epochs,
+                    epoch, self.epoch + epochs + 1,
                     batch_i, self.n_batches,
                     d_loss[0], 100 * d_loss[7],
                     g_loss[0],
@@ -499,7 +499,7 @@ class CycleGAN():
                 # If at save interval => save generated image samples
                 if batch_i % sample_interval == 0:
                     self.sample_images(imgs_A, imgs_B, batch_i, run_folder, test_A_file, test_B_file)
-                self.combined.save_weights(os.path.join(run_folder, 'weights/weights-%d.h5' % (self.epoch)))
+                self.combined.save_weights(os.path.join(run_folder, 'weights/weights-%d.h5' % (epoch)))
                 self.combined.save_weights(os.path.join(run_folder, 'weights/weights.h5'))
                 self.save_model(run_folder)
 
