@@ -510,7 +510,7 @@ class CycleGAN():
                 self.combined.save_weights(os.path.join(run_folder, 'weights/weights.h5'))
                 self.save_model(run_folder)
 
-                self.epoch += 1
+        self.epoch += epochs
 
     def sample_images(self, train_im_A, train_im_B, batch_i, run_folder, test_A_file, test_B_file, training=True):
 
