@@ -491,7 +491,7 @@ class CycleGAN():
                 # Plot the progress
                 print(
                     "[Epoch {}/{}] [Batch {}/{}] [D loss: {}, acc: {}] [G loss: {}, adv: {}, recon:{}, id: ] time: {} ".format(
-                    epoch, self.epoch + epochs + 1,
+                    epoch, self.epoch + epochs,
                     batch_i, self.n_batches,
                     d_loss[0], 100 * d_loss[7],
                     g_loss[0],
