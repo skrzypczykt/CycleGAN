@@ -166,7 +166,8 @@ def preprocess_image_test(image, label):
 def get_last_epoch(checkpoint_path):
     dir = os.path.join(checkpoint_path, 'weights')
     #/weights-{max_epoch}.h5')
-    checkpoints = [re.search('(?<=weights-)\d+(?=.h5)',file_name).group(0) for file_name in os.listdir(dir) ]
+    checkpoints = [re.search('(?<=weights-)\d+(?=.h5)',file_name) for file_name in os.listdir(dir) ]
+    checkpoints = [reg.group(0) for reg in checkpoints if reg]
     return max(checkpoints)
 
 """#CycleGAN definition"""
